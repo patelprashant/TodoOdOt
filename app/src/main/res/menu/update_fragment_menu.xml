@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_update"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_save"
+        android:iconTint="@color/white"
+        android:title= "@string/update_todo" />
+    <item
+        android:id="@+id/menu_delete"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_save"
+        android:iconTint="@color/white"
+        android:title= "@string/delete_todo" />
+
+</menu>
