@@ -8,7 +8,7 @@
     tools:context=".fragments.list.ListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listOfTodos"
+        android:id="@+id/list_of_todos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTodo"
+        android:id="@+id/add_todo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -38,10 +38,10 @@
         android:alpha="0.5"
         android:src="@drawable/ic_baseline_hourglass_empty_24"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/listOfTodos"
+        app:layout_constraintBottom_toBottomOf="@+id/list_of_todos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/listOfTodos"
-        app:layout_constraintTop_toTopOf="@+id/listOfTodos"
+        app:layout_constraintStart_toStartOf="@+id/list_of_todos"
+        app:layout_constraintTop_toTopOf="@+id/list_of_todos"
         app:layout_constraintVertical_bias="0.37"
         tools:visibility="visible" />
 
@@ -56,7 +56,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/listOfTodos"
+        app:layout_constraintStart_toStartOf="@+id/list_of_todos"
         app:layout_constraintTop_toBottomOf="@+id/no_data_imageView"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

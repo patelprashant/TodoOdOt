@@ -6,11 +6,13 @@
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.3234375" />
         <entry key="app/src/main/res/drawable/ic_baseline_hourglass_empty_24.xml" value="0.3104166666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3104166666666667" />
+        <entry key="app/src/main/res/drawable/item_background.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/drawable/list_fragment_menu.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.3072916666666667" />
+        <entry key="app/src/main/res/layout/todo_item_layout.xml" value="0.2796875" />
         <entry key="app/src/main/res/menu/add_fragment_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/list_fragment_menu.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/menu/update_fragment_menu.xml" value="0.3072916666666667" />

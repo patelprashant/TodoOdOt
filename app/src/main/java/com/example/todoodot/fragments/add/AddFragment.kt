@@ -1,7 +1,6 @@
 package com.example.todoodot.fragments.add
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
 import android.widget.EditText
 import android.widget.Spinner
@@ -10,13 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todoodot.R
-import com.example.todoodot.data.models.Priority
 import com.example.todoodot.data.models.ToDoData
 import com.example.todoodot.data.viewmodel.ToDoViewModel
+import com.example.todoodot.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +27,10 @@ class AddFragment : Fragment() {
 
         //Set option menu
         setHasOptionsMenu(true)
+
+        val prioritySpinner = view.findViewById<Spinner>(R.id.todo_priority)
+
+        prioritySpinner.onItemSelectedListener = mSharedViewModel.spinnerListener
 
         return view
     }
@@ -48,14 +52,14 @@ class AddFragment : Fragment() {
         val mPriority = view?.findViewById<Spinner>(R.id.todo_priority).toString()
         val mDescription = view?.findViewById<EditText>(R.id.todo_description).toString()
 
-        val validation = verifyUserInput(mTitle, mDescription)
+        val validation = mSharedViewModel.verifyUserInput(mTitle, mDescription)
 
         if (validation) {
             // Insert Data to Database
             val newData = ToDoData(
                 0,
                 mTitle,
-                parsePriority(mPriority),
+                mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
 
@@ -70,20 +74,6 @@ class AddFragment : Fragment() {
             //Feedback to User
             Toast.makeText(context, "Please Enter data", Toast.LENGTH_SHORT).show()
 
-        }
-    }
-
-    private fun verifyUserInput(title: String, desc: String): Boolean {
-        return if (TextUtils.isEmpty(title) || TextUtils.isEmpty(desc)) {
-            false
-        } else !(title.isEmpty() || desc.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when (priority) {
-            "High Priority" -> (Priority.HIGH)
-            "Medium Priority" -> (Priority.MEDIUM)
-            else -> (Priority.LOW)
         }
     }
 }
