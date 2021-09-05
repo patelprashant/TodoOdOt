@@ -7,47 +7,52 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.todoodot.R
 import com.example.todoodot.data.viewmodel.ToDoViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.todoodot.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
     private val adapter: ListAdapter by lazy { ListAdapter() }
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //Set option menu
         setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
-
-        val todoListRecyclerView = view.findViewById<RecyclerView>(R.id.list_of_todos)
-        todoListRecyclerView.adapter = adapter
-        todoListRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
             adapter.setData(data)
         })
 
-        val addTodoBtn = view.findViewById<FloatingActionButton>(R.id.add_todo)
-        addTodoBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
+        binding.listOfTodos.adapter = adapter
+        binding.listOfTodos.layoutManager = LinearLayoutManager(requireActivity())
 
-        val listOfTodos = view.findViewById<RecyclerView>(R.id.list_of_todos)
-        listOfTodos.setOnClickListener {
+        binding.listOfTodos.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_updateFragment)
         }
 
+        binding.addTodo.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+        }
 
         return view
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_fragment_menu, menu)
