@@ -34,6 +34,10 @@ class AddFragment : Fragment() {
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_fragment_menu, menu)
     }
@@ -47,7 +51,6 @@ class AddFragment : Fragment() {
 
     private fun insertToDoData() {
         //Get values from UI
-//        val mTitle = view?.findViewById<EditText>(R.id.todo_title).toString()
         val mTitle = binding.todoTitle.text.toString()
         val mPriority = binding.todoPriority.selectedItem.toString()
         val mDescription = binding.todoDescription.text.toString()
@@ -73,7 +76,6 @@ class AddFragment : Fragment() {
         } else {
             //Feedback to User
             Toast.makeText(context, "Please Enter data", Toast.LENGTH_SHORT).show()
-
         }
     }
 }

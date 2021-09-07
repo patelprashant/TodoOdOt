@@ -2,7 +2,9 @@ package com.example.todoodot.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoodot.R
 import com.example.todoodot.data.models.Priority
@@ -11,7 +13,6 @@ import com.example.todoodot.databinding.TodoItemLayoutBinding
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     var dataList = emptyList<ToDoData>()
-    private lateinit var bindig: TodoItemLayoutBinding
 
     class MyViewHolder(private val itemBinding: TodoItemLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root){
         fun bind(todoItem: ToDoData) {
@@ -50,33 +51,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         val toDoItem = dataList[position]
         holder.bind(toDoItem)
 
-//        val todoTitleTextView = holder.itemView.findViewById<TextView>(R.id.todo_title_text)
-//        todoTitleTextView?.text = toDoItem.title
-//
-//        val todoDescriptionText = holder.itemView.findViewById<TextView>(R.id.todo_desc_text)
-//        todoDescriptionText?.text = toDoItem.description
+        val rowBackground = holder.itemView.findViewById<ConstraintLayout>(R.id.item_background)
+        rowBackground.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(toDoItem)
+            holder.itemView.findNavController().navigate(action)
+        }
 
-//        val todoPriorityIndicator = holder.itemView.findViewById<CardView>(R.id.todo_priority_indicator)
-//        when (toDoItem.priority) {
-//            Priority.HIGH -> todoPriorityIndicator?.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.purple_700
-//                )
-//            )
-//            Priority.MEDIUM -> todoPriorityIndicator?.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.purple_500
-//                )
-//            )
-//            else -> todoPriorityIndicator?.setBackgroundColor(
-//                ContextCompat.getColor(
-//                    holder.itemView.context,
-//                    R.color.purple_200
-//                )
-//            )
-//        }
     }
 
     override fun getItemCount(): Int {
