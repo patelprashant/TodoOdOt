@@ -10,7 +10,7 @@ import com.example.todoodot.data.repository.ToDoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ToDoViewModel(application: Application) : AndroidViewModel(application){
+class ToDoViewModel(application: Application) : AndroidViewModel(application) {
     private val toDoDao = ToDoDatabase.getDatabase(application).todoDao()
     private val repository: ToDoRepository
 
@@ -36,6 +36,12 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application){
     fun deleteData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteData(toDoData)
+        }
+    }
+
+    fun deleteAllData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllData()
         }
     }
 }
