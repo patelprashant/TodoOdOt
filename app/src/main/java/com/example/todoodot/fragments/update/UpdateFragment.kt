@@ -1,5 +1,6 @@
 package com.example.todoodot.fragments.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -49,9 +50,11 @@ class UpdateFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_update) {
-            updateTodoData()
+        when (item.itemId) {
+            R.id.menu_update -> updateTodoData()
+            R.id.menu_delete -> deleteTodoData()
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -82,5 +85,23 @@ class UpdateFragment : Fragment() {
             //Feedback to User
             Toast.makeText(context, "Please Enter data", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun deleteTodoData() {
+        val builder = AlertDialog.Builder(context)
+
+        builder.setTitle("Delete  '${args.currentToDoItem.title}'?")
+        builder.setMessage("Are you sure you want to delete '${args.currentToDoItem.title}'?")
+
+        builder.setPositiveButton("Yes") { _, _ ->
+            mToDoViewModel.deleteData(args.currentToDoItem)
+            //Feedback to User
+            Toast.makeText(context, "Successfully deleted data", Toast.LENGTH_SHORT).show()
+            //Navigate back to list
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+
+        builder.create().show()
     }
 }
