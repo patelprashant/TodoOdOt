@@ -32,40 +32,49 @@ class ListFragment : Fragment() {
 
         // Inflate the layout for this fragment
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mSharedViewModel = mSharedViewModel
         val view = binding.root
 
+        //Setup recyclerview
+        setupRecyclerView()
+
+        // Observe liveData
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
             mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
         })
 
-        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
-            showEmptyDatabaseViews(it)
-        })
+//        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+//            showEmptyDatabaseViews(it)
+//        })
 
+
+//        binding.addTodo.setOnClickListener {
+//            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+//        }
+
+        return view
+    }
+
+    private fun setupRecyclerView() {
         binding.listOfTodos.adapter = adapter
         binding.listOfTodos.layoutManager = LinearLayoutManager(requireActivity())
 
         binding.listOfTodos.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_updateFragment)
         }
-
-        binding.addTodo.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
-
-        return view
     }
 
-    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
-        if (emptyDatabase) {
-            binding.noDataImageView.visibility = View.VISIBLE
-            binding.noDataTextView.visibility = View.VISIBLE
-        } else {
-            binding.noDataImageView.visibility = View.INVISIBLE
-            binding.noDataTextView.visibility = View.INVISIBLE
-        }
-    }
+//    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+//        if (emptyDatabase) {
+//            binding.noDataImageView.visibility = View.VISIBLE
+//            binding.noDataTextView.visibility = View.VISIBLE
+//        } else {
+//            binding.noDataImageView.visibility = View.INVISIBLE
+//            binding.noDataTextView.visibility = View.INVISIBLE
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
