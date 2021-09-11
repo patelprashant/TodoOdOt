@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoodot.R
 import com.example.todoodot.data.viewmodel.ToDoViewModel
 import com.example.todoodot.databinding.FragmentListBinding
+import com.example.todoodot.fragments.SharedViewModel
 
 class ListFragment : Fragment() {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
     private val adapter: ListAdapter by lazy { ListAdapter() }
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +35,12 @@ class ListFragment : Fragment() {
         val view = binding.root
 
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+            mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
+        })
+
+        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
         })
 
         binding.listOfTodos.adapter = adapter
@@ -48,6 +55,16 @@ class ListFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if (emptyDatabase) {
+            binding.noDataImageView.visibility = View.VISIBLE
+            binding.noDataTextView.visibility = View.VISIBLE
+        } else {
+            binding.noDataImageView.visibility = View.INVISIBLE
+            binding.noDataTextView.visibility = View.INVISIBLE
+        }
     }
 
     override fun onDestroyView() {
