@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoodot.R
 import com.example.todoodot.data.viewmodel.ToDoViewModel
@@ -60,10 +59,10 @@ class ListFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.listOfTodos.adapter = adapter
         binding.listOfTodos.layoutManager = LinearLayoutManager(requireActivity())
-
-        binding.listOfTodos.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
-        }
+//
+//        binding.listOfTodos.setOnClickListener {
+//            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+//        }
     }
 
 //    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {

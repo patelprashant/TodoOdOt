@@ -17,7 +17,7 @@ import com.example.todoodot.fragments.SharedViewModel
 class UpdateFragment : Fragment() {
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<UpdateFragmentArgs>()
+    private val args:UpdateFragmentArgs by navArgs()
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mToDoViewModel: ToDoViewModel by viewModels()
 
@@ -31,10 +31,11 @@ class UpdateFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
         val view = binding.root
+        binding.args = args
 
-        binding.currentTodoTitle.setText(args.currentToDoItem.title)
-        binding.currentTodoDescription.setText(args.currentToDoItem.description)
-        binding.currentTodoPriority.setSelection(mSharedViewModel.parsePriority(args.currentToDoItem.priority))
+//        binding.currentTodoTitle.setText(args.currentToDoItem.title)
+//        binding.currentTodoDescription.setText(args.currentToDoItem.description)
+//        binding.currentTodoPriority.setSelection(mSharedViewModel.parsePriority(args.currentToDoItem.priority))
         binding.currentTodoPriority.onItemSelectedListener = mSharedViewModel.spinnerListener
 
         return view
