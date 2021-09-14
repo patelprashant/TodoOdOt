@@ -1,4 +1,4 @@
-package com.example.todoodot.fragments.list
+package com.example.todoodot.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,7 +40,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 //            }
         }
         companion object {
-            fun from(parent: ViewGroup): MyViewHolder{
+            fun from(parent: ViewGroup): MyViewHolder {
                 val itemBinding = TodoItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return MyViewHolder(itemBinding)
             }

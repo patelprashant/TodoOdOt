@@ -7,11 +7,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todoodot.R
 import com.example.todoodot.data.viewmodel.ToDoViewModel
 import com.example.todoodot.databinding.FragmentListBinding
 import com.example.todoodot.fragments.SharedViewModel
+import com.example.todoodot.fragments.list.adapter.ListAdapter
 
 class ListFragment : Fragment() {
 
@@ -57,8 +60,12 @@ class ListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.listOfTodos.adapter = adapter
-        binding.listOfTodos.layoutManager = LinearLayoutManager(requireActivity())
+        val recyclerView = binding.listOfTodos
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+        swipeToDelete(recyclerView)
 //
 //        binding.listOfTodos.setOnClickListener {
 //            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
@@ -108,5 +115,22 @@ class ListFragment : Fragment() {
         builder.setNegativeButton("No") { _, _ -> }
 
         builder.create().show()
+    }
+
+    private fun swipeToDelete(recyclerView: RecyclerView) {
+        val swipeToDeleteCallBack = object : SwipeToDelete() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val itemToDelete = adapter.dataList[viewHolder.adapterPosition]
+                mToDoViewModel.deleteData(itemToDelete)
+                Toast.makeText(
+                    context,
+                    "Successfully deleted: '${itemToDelete.title}'",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 }
