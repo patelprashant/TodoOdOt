@@ -106,11 +106,33 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete_all) {
-            deleteAllData()
+        when (item.itemId) {
+            R.id.menu_delete_all -> {
+                deleteAllData()
+            }
+
+            R.id.menu_priority_high -> {
+                sortByHighPriority()
+            }
+
+            R.id.menu_priority_low -> {
+                sortByLowPriority()
+            }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun sortByHighPriority() {
+        mToDoViewModel.sortByHighPriority.observe(this, Observer {
+            adapter.setData(it)
+        })
+    }
+
+    private fun sortByLowPriority() {
+        mToDoViewModel.sortByLowPriority.observe(this, Observer {
+            adapter.setData(it)
+        })
     }
 
 
