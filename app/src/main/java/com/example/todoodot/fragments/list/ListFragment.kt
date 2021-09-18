@@ -157,7 +157,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedItem = adapter.dataList[viewHolder.adapterPosition]
                 mToDoViewModel.deleteData(deletedItem)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+//                adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 //Restore deleted item
                 restoreDeletedData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
@@ -178,7 +178,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val snackBar = Snackbar.make(view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
-            adapter.notifyItemChanged(position)
+//            adapter.notifyItemChanged(position)
         }
         snackBar.show()
     }
