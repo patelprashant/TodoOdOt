@@ -17,6 +17,7 @@ import com.example.todoodot.databinding.FragmentListBinding
 import com.example.todoodot.fragments.SharedViewModel
 import com.example.todoodot.fragments.list.adapter.ListAdapter
 import com.google.android.material.snackbar.Snackbar
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 class ListFragment : Fragment() {
 
@@ -66,6 +67,9 @@ class ListFragment : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 200
+        }
 
         swipeToDelete(recyclerView)
 //
