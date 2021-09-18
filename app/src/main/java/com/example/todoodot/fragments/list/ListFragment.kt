@@ -3,15 +3,14 @@ package com.example.todoodot.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
-
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.todoodot.R
 import com.example.todoodot.data.models.ToDoData
 import com.example.todoodot.data.viewmodel.ToDoViewModel
@@ -68,7 +67,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.listOfTodos
 
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+//        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 200
         }
