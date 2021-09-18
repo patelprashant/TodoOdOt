@@ -17,6 +17,7 @@ import com.example.todoodot.data.viewmodel.ToDoViewModel
 import com.example.todoodot.databinding.FragmentListBinding
 import com.example.todoodot.fragments.SharedViewModel
 import com.example.todoodot.fragments.list.adapter.ListAdapter
+import com.example.todoodot.fragments.utils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
@@ -78,6 +79,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 //        binding.listOfTodos.setOnClickListener {
 //            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
 //        }
+
+        hideKeyboard(requireActivity())
     }
 
 //    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
@@ -160,7 +163,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 //                adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 //Restore deleted item
-                restoreDeletedData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
+                restoreDeletedData(viewHolder.itemView, deletedItem)
 
 //                Toast.makeText(
 //                    context,
@@ -174,7 +177,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    internal fun restoreDeletedData(view: View, deletedItem: ToDoData, position: Int) {
+    internal fun restoreDeletedData(view: View, deletedItem: ToDoData) {
         val snackBar = Snackbar.make(view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
