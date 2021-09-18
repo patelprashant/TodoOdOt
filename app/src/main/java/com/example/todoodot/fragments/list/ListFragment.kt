@@ -145,7 +145,7 @@ class ListFragment : Fragment() {
         val snackBar = Snackbar.make(view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
-            adapter.notifyItemInserted(position)
+            adapter.notifyItemChanged(position)
         }
         snackBar.show()
     }

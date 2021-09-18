@@ -2,6 +2,7 @@ package com.example.todoodot.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoodot.data.models.ToDoData
 import com.example.todoodot.databinding.TodoItemLayoutBinding
@@ -9,7 +10,8 @@ import com.example.todoodot.databinding.TodoItemLayoutBinding
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     var dataList = emptyList<ToDoData>()
 
-    class MyViewHolder(private val itemBinding: TodoItemLayoutBinding) : RecyclerView.ViewHolder(itemBinding.root){
+    class MyViewHolder(private val itemBinding: TodoItemLayoutBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(todoItem: ToDoData) {
             itemBinding.toDoDataItem = todoItem
             itemBinding.executePendingBindings()
@@ -39,9 +41,14 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 //                )
 //            }
         }
+
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
-                val itemBinding = TodoItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val itemBinding = TodoItemLayoutBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
                 return MyViewHolder(itemBinding)
             }
         }
@@ -68,7 +75,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     fun setData(toDoDataList: List<ToDoData>) {
+        val toDoDiffUtil = ToDoDiffUtil(dataList, toDoDataList)
+        val toDoDiffUtilResult = DiffUtil.calculateDiff(toDoDiffUtil)
         this.dataList = toDoDataList
-        notifyDataSetChanged()
+        toDoDiffUtilResult.dispatchUpdatesTo(this)
     }
 }
