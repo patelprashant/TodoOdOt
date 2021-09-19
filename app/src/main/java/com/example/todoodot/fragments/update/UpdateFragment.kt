@@ -33,9 +33,6 @@ class UpdateFragment : Fragment() {
         val view = binding.root
         binding.args = args
 
-//        binding.currentTodoTitle.setText(args.currentToDoItem.title)
-//        binding.currentTodoDescription.setText(args.currentToDoItem.description)
-//        binding.currentTodoPriority.setSelection(mSharedViewModel.parsePriority(args.currentToDoItem.priority))
         binding.currentTodoPriority.onItemSelectedListener = mSharedViewModel.spinnerListener
 
         return view

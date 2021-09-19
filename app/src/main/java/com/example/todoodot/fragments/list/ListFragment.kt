@@ -52,15 +52,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             adapter.setData(data)
         })
 
-//        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
-//            showEmptyDatabaseViews(it)
-//        })
-
-
-//        binding.addTodo.setOnClickListener {
-//            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-//        }
-
         return view
     }
 
@@ -68,30 +59,14 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.listOfTodos
 
         recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 200
         }
 
         swipeToDelete(recyclerView)
-//
-//        binding.listOfTodos.setOnClickListener {
-//            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
-//        }
-
         hideKeyboard(requireActivity())
     }
-
-//    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
-//        if (emptyDatabase) {
-//            binding.noDataImageView.visibility = View.VISIBLE
-//            binding.noDataTextView.visibility = View.VISIBLE
-//        } else {
-//            binding.noDataImageView.visibility = View.INVISIBLE
-//            binding.noDataTextView.visibility = View.INVISIBLE
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -160,16 +135,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedItem = adapter.dataList[viewHolder.adapterPosition]
                 mToDoViewModel.deleteData(deletedItem)
-//                adapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 //Restore deleted item
                 restoreDeletedData(viewHolder.itemView, deletedItem)
-
-//                Toast.makeText(
-//                    context,
-//                    "Successfully deleted: '${deletedItem.title}'",
-//                    Toast.LENGTH_SHORT
-//                ).show()
             }
         }
 
@@ -181,7 +149,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val snackBar = Snackbar.make(view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
-//            adapter.notifyItemChanged(position)
         }
         snackBar.show()
     }

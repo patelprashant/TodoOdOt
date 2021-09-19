@@ -15,31 +15,6 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         fun bind(todoItem: ToDoData) {
             itemBinding.toDoDataItem = todoItem
             itemBinding.executePendingBindings()
-
-
-//            itemBinding.todoTitleText.text = todoItem.title
-//            itemBinding.todoDescText.text = todoItem.description
-
-//            when (todoItem.priority) {
-//                Priority.HIGH -> itemBinding.todoPriorityIndicator.setBackgroundColor(
-//                    ContextCompat.getColor(
-//                        itemView.context,
-//                        R.color.purple_700
-//                    )
-//                )
-//                Priority.MEDIUM -> itemBinding.todoPriorityIndicator.setBackgroundColor(
-//                    ContextCompat.getColor(
-//                        itemView.context,
-//                        R.color.purple_500
-//                    )
-//                )
-//                else -> itemBinding.todoPriorityIndicator.setBackgroundColor(
-//                    ContextCompat.getColor(
-//                        itemView.context,
-//                        R.color.purple_200
-//                    )
-//                )
-//            }
         }
 
         companion object {
@@ -61,13 +36,6 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentDataItem = dataList[position]
         holder.bind(currentDataItem)
-
-//        val rowBackground = holder.itemView.findViewById<ConstraintLayout>(R.id.item_background)
-//        rowBackground.setOnClickListener {
-//            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentDataItem)
-//            holder.itemView.findNavController().navigate(action)
-//        }
-
     }
 
     override fun getItemCount(): Int {
