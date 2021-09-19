@@ -60,9 +60,9 @@ class BindingAdapters {
         @JvmStatic
         fun parsePriorityColor(view: CardView, priority: Priority) {
             when (priority) {
-                Priority.HIGH -> view.setBackgroundColor(view.context.getColor(R.color.purple_700))
-                Priority.MEDIUM -> view.setBackgroundColor(view.context.getColor(R.color.purple_500))
-                Priority.LOW -> view.setBackgroundColor(view.context.getColor(R.color.purple_200))
+                Priority.HIGH -> view.setBackgroundColor(view.context.getColor(R.color.red))
+                Priority.MEDIUM -> view.setBackgroundColor(view.context.getColor(R.color.orange))
+                Priority.LOW -> view.setBackgroundColor(view.context.getColor(R.color.green))
             }
         }
 

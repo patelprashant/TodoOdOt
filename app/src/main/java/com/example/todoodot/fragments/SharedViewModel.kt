@@ -32,7 +32,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                         (parent?.getChildAt(0) as TextView).setTextColor(
                             ContextCompat.getColor(
                                 application,
-                                R.color.purple_700
+                                R.color.red
                             )
                         )
                     }
@@ -40,7 +40,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                         (parent?.getChildAt(0) as TextView).setTextColor(
                             ContextCompat.getColor(
                                 application,
-                                R.color.purple_500
+                                R.color.orange
                             )
                         )
                     }
@@ -48,7 +48,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                         (parent?.getChildAt(0) as TextView).setTextColor(
                             ContextCompat.getColor(
                                 application,
-                                R.color.purple_200
+                                R.color.green
                             )
                         )
                     }
